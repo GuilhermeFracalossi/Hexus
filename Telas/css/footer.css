@@ -1,0 +1,51 @@
+
+        footer {
+            background-color: #17191C;
+            padding: 30px 0px;
+            margin-top: 100px;
+        }
+
+        footer h3 {
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+
+        }
+
+        .payment-methos-images {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .site-map {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            width: 80%;
+            column-gap: 40px;
+            row-gap: 20px;
+
+        }
+
+        .site-map a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        footer .bottom-footer hr {
+            width: 60%;
+            color: #9d9d9d;
+            margin-top: 20px;
+
+        }
+
+        footer .bottom-footer img {
+            margin: 30px 0px;
+        }
+
+        footer .bottom-footer p {
+            color: #dedede;
+            font-style: italic;
+        }
