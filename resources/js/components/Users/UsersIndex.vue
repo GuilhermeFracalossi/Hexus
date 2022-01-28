@@ -2,12 +2,10 @@
     <div>
         <div>
             <button
-                class="btn btn-primary"
-                @click="$router.push({ name: 'products.create' })"
-            >
+                class="btn btn-primary" @click="$router.push({ name: 'users.create' })">
                 Incluir
             </button>
-            <button class="btn btn-danger" @click="deleteProducts(selectedProducts)">Excluir</button>
+            <button class="btn btn-danger" @click="deleteUsers(selectedUsers)">Excluir</button>
 
         </div>
 
@@ -16,28 +14,26 @@
                 <tr scope="col">
                     <td scope="col"></td>
                     <td scope="col">Nome</td>
-                    <td scope="col">Descrição</td>
-                    <td scope="col">Informação</td>
-                    <td scope="col">Categorias</td>
-                    <td scope="col">Preço</td>
+                    <td scope="col">CPF</td>
+                    <td scope="col">Telefone</td>
+                    <td scope="col">Status</td>
                 </tr>
             </thead>
             <tbody>
-                <template v-for:="product in products">
+                <template v-for:="user in users">
                     <tr >
                         <td>
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                v-bind:value="product.id"
-                                v-model="selectedProducts"
+                                v-bind:value="user.id"
+                                v-model="selectedUsers"
                             />
                         </td>
-                        <td @click="editProduct(product.id)">{{ product.name }}</td>
-                        <td @click="editProduct(product.id)">{{ product.description }}</td>
-                        <td @click="editProduct(product.id)">{{ product.information }}</td>
-                        <td @click="editProduct(product.id)">{{ product.category }}</td>
-                        <td @click="editProduct(product.id)">{{ product.price }}</td>
+                        <td @click="editUser(user.id)">{{ user.name }}</td>
+                        <td @click="editUser(user.id)">{{ user.cpf }}</td>
+                        <td @click="editUser(user.id)">{{ user.phone }}</td>
+                        <td @click="editUser(user.id)">{{ user.status }}</td>
                     </tr>
                 </template>
             </tbody>
@@ -46,30 +42,30 @@
 </template>
 
 <script>
-import useProducts from "../../composables/products";
+import useUsers from "../../composables/users";
 import { onMounted, ref } from "vue";
 import router from "../../router";
 export default {
 
     setup() {
-        const selectedProducts = ref([])
-        const { products, getProducts, destroyProducts } = useProducts();
+        const selectedUsers = ref([])
+        const { users, getUsers, destroyUsers } = useUsers();
 
-        onMounted(getProducts);
+        onMounted(getUsers);
 
-        const editProduct = (id) => {
-            return router.push({ name: 'products.edit', params: { id: id} })
+        const editUser = (id) => {
+            return router.push({ name: 'users.edit', params: { id: id} })
         }
-        const deleteProducts = async (ids) => {
-            await destroyProducts(ids)
-            await getProducts()
+        const deleteUsers = async (ids) => {
+            await destroyUsers(ids)
+            await getUsers()
         }
 
         return { 
-            products,
-            selectedProducts,
-            deleteProducts,
-            editProduct
+            users,
+            selectedUsers,
+            deleteUsers,
+            editUser
         };
     }
 };

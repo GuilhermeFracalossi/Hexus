@@ -9,7 +9,7 @@ export default function useCategories () {
     const category = ref([]);
     const router = useRouter();
 
-
+    const errors = ref("");
     const getCategories = async(id) => {
         let response =  await axios.get('/api/categories')
         categories.value = response.data.data;
@@ -29,7 +29,7 @@ export default function useCategories () {
     }
     const updateCategory = async(id) => {
         try{
-            await axios.put('/api/categories/'+id, user.value );
+            await axios.put('/api/categories/'+id, category.value );
             await router.push({name: 'categories.index'})
         }catch(err){
             console.log(err)
@@ -37,26 +37,22 @@ export default function useCategories () {
     }
 
     const destroyCategories = async(ids) => {
-
         try {
-
             await axios.delete('/api/categories/'+ {ids: ids})
         } catch(err) {
             console.log(err)
         }
-
     }
-
     
     return {
         categories,
         category,
+        errors,
         getCategory,
         getCategories,
         storeCategory,
         updateCategory,
         destroyCategories
     }
-
 
 }

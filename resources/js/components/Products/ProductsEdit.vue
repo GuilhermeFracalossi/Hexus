@@ -65,6 +65,8 @@
             ></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" @click="$router.push({name: 'produtos.index'})">Cancelar</button>
+
     </form>
 </template>
 

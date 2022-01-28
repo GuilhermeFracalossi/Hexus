@@ -27,6 +27,19 @@
                 v-model="form.password"
             />
         </div>
+
+        <div class="mb-3">
+            <label for="user_confirm_password" class="form-label"
+                >Confirme a senha</label
+            >
+            <input
+                type="password"
+                class="form-control"
+                id="user_confirm_password"
+                v-model="form.password_confirmation"
+            />
+        </div>
+
         <div class="mb-3">
             <label for="user_cpf" class="form-label">CPF</label>
             <input
@@ -38,32 +51,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="user_password" class="form-label">Senha</label>
-            <input
-                type="password"
-                class="form-control"
-                id="user_password"
-                v-model="form.password"
-            />
-        </div>
-
-        <div class="mb-3">
-            <label for="user_confirm_password" class="form-label"
-                >Confirme a senha</label
-            >
-            <input
-                type="password"
-                class="form-control"
-                id="user_confirm_password"
-                v-model="form.confirmPassword"
-            />
-        </div>
-        <div class="mb-3">
-            <label for="user_cargo" class="form-label">Cargo</label>
-            <select class="form-select" id="user_status" v-model="form.cargo">
+            <label for="user_role" class="form-label">Cargo</label>
+            <select class="form-select" id="user_role" v-model="form.role">
                 <option selected>Selecione o cargo</option>
-                <option value="A">Ativo</option>
-                <option value="I">Inativo</option>
+                <option value="A">Administrador</option>
+                <option value="U">Usuário</option>
             </select>
         </div>
         <div class="mb-3">
@@ -73,25 +65,6 @@
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="product_description" class="form-label">Descrição</label>
-            <textarea
-                class="form-control"
-                id="product_description"
-                rows="3"
-                v-model="form.description"
-            ></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="product_info" class="form-label">Informações</label>
-            <textarea
-                class="form-control"
-                id="product_info"
-                rows="6"
-                v-model="form.information"
-            ></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -106,8 +79,6 @@ export default {
         const form = reactive({
             name: "",
             email: "",
-            password: "",
-            confirmPassword: "",
             status: "",
             cpf: "",
             role: "",

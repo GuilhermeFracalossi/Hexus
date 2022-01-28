@@ -40,7 +40,7 @@ export default function useProducts() {
         }
     };
     const destroyProducts = async (ids) => {
-        await axios.delete(`/api/products/deleteMultiple`,  {ids: ids})
+        await axios.delete('/api/products/deleteMultiple',  {ids: ids})
     }
 
     return {

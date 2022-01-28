@@ -8,7 +8,6 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
-use DebugBar\StandardDebugBar;
 
 class ProductController extends Controller {
     /**
@@ -68,7 +67,7 @@ class ProductController extends Controller {
        // dd($request);
         try {
             Product::whereIn('id', $request->ids)->delete();
-            return response()->json('users deleted');
+            return response()->json('products deleted');
         } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }

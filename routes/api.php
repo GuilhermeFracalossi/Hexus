@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CategoryController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +28,17 @@ Route::apiResource('products', ProductController::class)->except([
     'destroy'
 ]);
 
+
+Route::delete('users/deleteMultiple', [UserController::class, 'destroyMultiple']);
+
+Route::apiResource('users', UserController::class)->except([
+    'destroy'
+]);
+
+Route::delete('categories/deleteMultiple', [CategoryController::class, 'destroyMultiple']);
+
+Route::apiResource('categories', CategoryController::class)->except([
+    'destroy'
+]);
 
 

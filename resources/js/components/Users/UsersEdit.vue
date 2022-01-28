@@ -1,75 +1,58 @@
 <template>
-    <form @submit.prevent="saveProduct">
+    <form @submit.prevent="saveUser">
+        <input type="hidden" id="user_id" v-model="user.id">
         <div class="mb-3">
-            <label for="product_name" class="form-label">Nome</label>
+            <label for="user_name" class="form-label">Nome</label>
             <input
                 type="text"
                 class="form-control"
-                id="product_name"
-                v-model="product.name"
+                id="user_name"
+                v-model="user.name"
             />
         </div>
         <div class="mb-3">
-            <label for="product_category" class="form-label">Categoria</label>
-            <select
-                class="form-select"
-                id="product_category"
-                v-model="product.category"
-            >
-                <option selected>Selecione categoria...</option>
-                <option value="1">Processador</option>
-                <option value="2">Placa de vídeo</option>
-                <option value="3">Placa mãe</option>
+            <label for="user_category" class="form-label">Email</label>
+            <input
+                type="email"
+                class="form-control"
+                id="user_category"
+                v-model="user.email"
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="user_cpf" class="form-label">CPF</label>
+            <input
+                type="text"
+                class="form-control"
+                id="user_cpf"
+                v-model="user.cpf"
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="user_role" class="form-label">Cargo</label>
+            <select class="form-select" id="user_role" v-model="user.role">
+                <option selected>Selecione o cargo</option>
+                <option value="A">Administrador</option>
+                <option value="U">Usuário</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="product_price" class="form-label">Preço</label>
-            <input
-                type="text"
-                class="form-control"
-                id="product_price"
-                v-model="product.price"
-            />
-        </div>
-        <div class="mb-3">
-            <label for="product_status" class="form-label">Status</label>
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                id="product_status"
-                v-model="product.status"
-            >
+            <label for="user_status" class="form-label">Status</label>
+            <select class="form-select" id="user_status" v-model="user.status">
                 <option selected>Selecione status</option>
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="product_description" class="form-label"
-                >Descrição</label
-            >
-            <textarea
-                class="form-control"
-                id="product_description"
-                rows="3"
-                v-model="product.description"
-            ></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="product_info" class="form-label">Informações</label>
-            <textarea
-                class="form-control"
-                id="product_info"
-                rows="6"
-                v-model="product.information"
-            ></textarea>
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" @click="$router.push({name: 'users.index'})">Cancelar</button>
     </form>
 </template>
 
 <script>
-import useProducts from "../../composables/products";
+import useUsers from "../../composables/users";
 import { onMounted } from "vue";
 export default {
     props: {
@@ -79,17 +62,17 @@ export default {
         },
     },
     setup(props) {
-        const { product, getProduct, updateProduct } = useProducts();
+        const { user, getUser, updateUser } = useUsers();
 
-        onMounted(getProduct(props.id));
-        const saveProduct = async () => {
+        onMounted(getUser(props.id));
+        const saveUser = async () => {
             console.log(props.id)
-            await updateProduct(props.id);
+            await updateUser(props.id);
         };
 
         return {
-            product,
-            saveProduct,
+            user,
+            saveUser,
         };
     },
 };
