@@ -10,16 +10,21 @@
             />
         </div>
         <div class="mb-3">
-            <label for="category_parent_category" class="form-label">Categoria</label>
+             <label for="category_parent_category" class="form-label"
+                >Categoria pai</label
+            >
             <select
                 class="form-select"
                 id="category_parent_category"
-                v-model="category.parent_category"
+                v-model="category.parent_category_id"
             >
-                <option selected>Selecione categoria...</option>
-                <option value="1">Processador</option>
-                <option value="2">Placa de vídeo</option>
-                <option value="3">Placa mãe</option>
+                <option value="0">Selecione uma categoria...</option>
+                <option
+                    v-for:="category in categories"
+                    v-bind:value="category.id"
+                >
+                    {{ category.name }}
+                </option>
             </select>
         </div>
 
@@ -31,7 +36,7 @@
                 id="category_status"
                 v-model="category.status"
             >
-                <option selected>Selecione status</option>
+                <option value="0">Selecione status</option>
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>

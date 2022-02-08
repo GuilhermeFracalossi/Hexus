@@ -6,18 +6,40 @@ import axios from "axios";
 export default function useCategories () {
 
     const categories = ref([]);
+    const categoriesListing = ref([]);
     const category = ref([]);
     const router = useRouter();
 
     const errors = ref("");
-    const getCategories = async(id) => {
+
+
+    const getCategories = async() => {
         let response =  await axios.get('/api/categories')
         categories.value = response.data.data;
+
+    }
+    const getCategoriesForListing = async(search) => {
+        let response =  await axios.get('/api/categories')
+        let data = {};
+        response.data.data.forEach(element => {
+            if (!search) {
+                data[element.id] = element
+                return;
+            }
+
+            if (element.name.toLowerCase().search(search.toLowerCase()) !== -1) {
+                data[element.id] = element
+
+            }
+        });
+        categoriesListing.value = data
+        
     }
     const getCategory = async(id) => {
         let response =  await axios.get(`/api/categories/${id}`);
         category.value = response.data.data;
     }
+
 
     const storeCategory = async(data) => {
         try {
@@ -47,9 +69,11 @@ export default function useCategories () {
     return {
         categories,
         category,
+        categoriesListing,
         errors,
         getCategory,
         getCategories,
+        getCategoriesForListing,
         storeCategory,
         updateCategory,
         destroyCategories

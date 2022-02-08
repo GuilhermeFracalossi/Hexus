@@ -1,5 +1,5 @@
 <template>
-   <form @submit.prevent="saveCategory">
+    <form @submit.prevent="saveCategory">
         <div class="mb-3">
             <label for="category_name" class="form-label">Nome</label>
             <input
@@ -10,57 +10,66 @@
             />
         </div>
         <div class="mb-3">
-            <label for="category_parent_category" class="form-label">Categoria</label>
+            <label for="category_parent_category" class="form-label"
+                >Categoria pai</label
+            >
             <select
                 class="form-select"
                 id="category_parent_category"
                 v-model="form.parent_category_id"
             >
-                <option selected>Selecione categoria...</option>
-                <option value="1">Processador</option>
-                <option value="2">Placa de vídeo</option>
-                <option value="3">Placa mãe</option>
+                <option value="0">Selecione uma categoria</option>
+                <option
+                    v-for:="category in categories"
+                    v-bind:value="category.id"
+                >
+                    {{ category.name }}
+                </option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="category_status" class="form-label">Status</label>
+
             <select
                 class="form-select"
                 aria-label="Default select example"
                 id="category_status"
                 v-model="form.status"
             >
-                <option selected>Selecione status</option>
+                <option value="0">Selecione status</option>
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" @click="$router.push({name: 'categories.index'})">Cancelar</button>
+
     </form>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import useCategories from "../../composables/categories";
 
 export default {
-
     setup() {
         const form = reactive({
             name: "",
-            parent_category: "",
-            status: ""
+            parent_category_id: 0,
+            status: "0",
         });
+        const { categories, errors, storeCategory, getCategories } = useCategories();
 
-
-        const { errors, storeCategory } = useCategories();
+        onMounted(getCategories);
 
         const saveCategory = async () => {
             await storeCategory({ ...form });
         };
+
         return {
             form,
+            categories,
             errors,
             saveCategory,
         };

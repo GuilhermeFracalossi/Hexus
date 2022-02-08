@@ -7,6 +7,7 @@ export default function useProducts() {
     const products = ref([]);
     const router = useRouter();
     const product = ref([]);
+    const productsListing = ref([]);
 
 
     const errors = ref("");
@@ -16,10 +17,35 @@ export default function useProducts() {
     };
 
     const getProduct = async (id) => {
+
         let response = await axios.get(`/api/products/${id}`);
         product.value = response.data.data;
     };
 
+    const getActiveProducts = async (random = false, category = null) => {
+        let response = await axios.get("/api/products?random="+random);
+        console.log(response.data)
+        products.value = response.data;
+
+    };
+
+    const getProductsForListing = async(search) => {
+        let response =  await axios.get('/api/products')
+        let data = {};
+        response.data.data.forEach(element => {
+            if (!search) {
+                data[element.id] = element
+                return;
+            }
+            
+            if (element.name.toLowerCase().search(search.toLowerCase()) !== -1) {
+                data[element.id] = element
+
+            }
+        });
+        productsListing.value = data
+        
+    }
 
     const storeProduct = async (data) => {
         try {
@@ -46,9 +72,12 @@ export default function useProducts() {
     return {
         products,
         product,
+        productsListing,
         errors,
         getProducts,
         getProduct,
+        getProductsForListing,
+        getActiveProducts,
         storeProduct,
         updateProduct,
         destroyProducts

@@ -7,20 +7,36 @@ export default function useUsers() {
     const users = ref([]);
     const router = useRouter();
     const user = ref([]);
-
+    const usersListing = ref([]);
 
     const errors = ref("");
-    const getUsers = async () => {
-        let response = await axios.get("/api/users");
-        users.value = response.data.data;
-    };
+
 
     const getUser = async (id) => {
         let response = await axios.get(`/api/users/${id}`);
         user.value = response.data.data;
-        console.log(user.value)
+        console.log(user.value);
     };
 
+    const getUsersForListing = async (search) => {
+        let response = await axios.get("/api/users");
+        let data = {};
+        response.data.data.forEach((element) => {
+            if (!search) {
+                data[element.id] = element;
+                return;
+            }
+            if (
+                element.name.toLowerCase().search(search.toLowerCase()) !==
+                    -1 ||
+                element.cpf.toLowerCase().search(search.toLowerCase()) !== -1
+            ) {
+                data[element.id] = element;
+            }
+        });
+        usersListing.value = data;
+
+    };
 
     const storeUser = async (data) => {
         try {
@@ -33,7 +49,7 @@ export default function useUsers() {
 
     const updateUser = async (id) => {
         try {
-            await axios.put("/api/users/"+id, user.value);
+            await axios.put("/api/users/" + id, user.value);
             await router.push({ name: "users.index" });
         } catch (err) {
             console.log(err);
@@ -41,20 +57,21 @@ export default function useUsers() {
     };
     const destroyUsers = async (ids) => {
         try {
-            await axios.delete(`/api/users/deleteMultiple`,  {ids: ids})
-        } catch(err) {
+            await axios.delete(`/api/users/deleteMultiple`, { ids: ids });
+        } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     return {
         users,
         user,
+        usersListing,
         errors,
-        getUsers,
+        getUsersForListing,
         getUser,
         storeUser,
         updateUser,
-        destroyUsers
+        destroyUsers,
     };
 }

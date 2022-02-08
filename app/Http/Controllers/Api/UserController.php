@@ -27,6 +27,8 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request) {
+        dd($request);
+
         $user = User::create($request->validated());
         return new UserResource($user);
     }
@@ -49,10 +51,9 @@ class UserController extends Controller {
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user) {
- 
-        
-       // $user = User::find($request->id);
+    public function update(UserRequest $request) {
+
+        $user = User::find($request->id);
    
         $user->update($request->validated());
         return new UserResource($user);

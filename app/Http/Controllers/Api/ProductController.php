@@ -15,10 +15,19 @@ class ProductController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return ProductResource::collection(Product::all());
+    public function index(Request $request) {
+        if ($request->status == "a") {
+            $products = ProductResource::collection(Product::all()->where('status', '=', 'A'));
+        } else {
+            $products = ProductResource::collection(Product::all());
+        }
+        
+        return $request->random ? $products->shuffle() : $products;
     }
 
+    public function indexActives() {
+        return ProductResource::collection(Product::all()->where('status', '=', 'A'));
+    }
     /**
      * Store a newly created resource in storage.
      *

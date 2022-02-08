@@ -12,6 +12,10 @@ import UsersIndex from "../components/users/UsersIndex";
 import UsersCreate from "../components/users/UsersCreate";
 import UsersEdit from "../components/users/UsersEdit";
 
+
+import Home from "../components/Home";
+import ProductView from "../components/ProductView";
+
 import Dashboard from "../components/Dashboard";
 
 const routes = [
@@ -68,6 +72,18 @@ const routes = [
         path: "/dashboard/users/:id/edit",
         name: "users.edit",
         component: UsersEdit,
+        props: true
+    },
+
+    {
+        path: "/",
+        name: "home",
+        component: Home
+    },
+    {
+        path: "/product/:id",
+        name: "product.view",
+        component: ProductView,
         props: true
     }
 ];

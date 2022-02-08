@@ -53,7 +53,7 @@
         <div class="mb-3">
             <label for="user_role" class="form-label">Cargo</label>
             <select class="form-select" id="user_role" v-model="form.role">
-                <option selected>Selecione o cargo</option>
+                <option value="0">Selecione o cargo</option>
                 <option value="A">Administrador</option>
                 <option value="U">Usuário</option>
             </select>
@@ -61,12 +61,14 @@
         <div class="mb-3">
             <label for="user_status" class="form-label">Status</label>
             <select class="form-select" id="user_status" v-model="form.status">
-                <option selected>Selecione status</option>
+                <option value="0">Selecione status</option>
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" @click="$router.push({name: 'users.index'})">Cancelar</button>
+
     </form>
 </template>
 
@@ -79,9 +81,9 @@ export default {
         const form = reactive({
             name: "",
             email: "",
-            status: "",
+            status: "0",
             cpf: "",
-            role: "",
+            role: "0",
         });
 
         const { errors, storeUser } = userUsers();

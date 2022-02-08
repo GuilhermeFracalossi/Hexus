@@ -1,14 +1,17 @@
 <template>
     <div>
         <div>
-            <button
-                class="btn btn-primary"
-                @click="$router.push({ name: 'products.create' })"
-            >
+           
+            <router-link :to="{ name: 'products.create' }" class="btn btn-primary"></router-link>
                 Incluir
+         
+            <button
+                class="btn btn-danger"
+                @click="deleteProducts(selectedProducts)"
+            >
+                Excluir
             </button>
-            <button class="btn btn-danger" @click="deleteProducts(selectedProducts)">Excluir</button>
-
+            <input type="text" class="form-control" v-model="search" placeholder="Pesquisar produtos" />
         </div>
 
         <table class="table">
@@ -16,15 +19,15 @@
                 <tr scope="col">
                     <td scope="col"></td>
                     <td scope="col">Nome</td>
-                    <td scope="col">Descrição</td>
-                    <td scope="col">Informação</td>
-                    <td scope="col">Categorias</td>
+                    <td scope="col">Categoria</td>
                     <td scope="col">Preço</td>
+                    <td scope="col">Status</td>
+                    <td scope="col">Modificado em:</td>
                 </tr>
             </thead>
             <tbody>
-                <template v-for:="product in products">
-                    <tr >
+                <template v-for:="product in productsListing">
+                    <tr>
                         <td>
                             <input
                                 class="form-check-input"
@@ -33,11 +36,22 @@
                                 v-model="selectedProducts"
                             />
                         </td>
-                        <td @click="editProduct(product.id)">{{ product.name }}</td>
-                        <td @click="editProduct(product.id)">{{ product.description }}</td>
-                        <td @click="editProduct(product.id)">{{ product.information }}</td>
-                        <td @click="editProduct(product.id)">{{ product.category }}</td>
-                        <td @click="editProduct(product.id)">{{ product.price }}</td>
+                        <td @click="editProduct(product.id)">
+                            {{ product.name }}
+                        </td>
+                        <td @click="editProduct(product.id)">
+                            {{ product.category }}
+                        </td>
+                        <td @click="editProduct(product.id)">
+                            {{ product.price }}
+                        </td>
+                        <td @click="editProduct(product.id)">
+                            {{ product.status }}
+                        </td>
+                        <td @click="editProduct(product.id)">
+                            {{ product.updated_at.substring(0, 10) }}
+                        </td>
+
                     </tr>
                 </template>
             </tbody>
@@ -47,30 +61,45 @@
 
 <script>
 import useProducts from "../../composables/products";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import router from "../../router";
 export default {
-
     setup() {
-        const selectedProducts = ref([])
-        const { products, getProducts, destroyProducts } = useProducts();
+        const selectedProducts = ref([]);
+        const search = ref([]);
+        const { productsListing, getProductsForListing, destroyProducts } = useProducts();
+        var timer  = undefined;
 
-        onMounted(getProducts);
+        onMounted(getProductsForListing);
 
+        watch(
+            search,
+            (newSearch, oldSearch) => {
+                clearTimeout(timer);
+
+                timer = setTimeout(() => {
+                    getProductsForListing(newSearch);
+                }, 500);
+            },
+            {
+                flush: "post",
+            }
+        );
         const editProduct = (id) => {
-            return router.push({ name: 'products.edit', params: { id: id} })
-        }
+            return router.push({ name: "products.edit", params: { id: id } });
+        };
         const deleteProducts = async (ids) => {
-            await destroyProducts(ids)
-            await getProducts()
-        }
+            await destroyProducts(ids);
+            await getProductsForListing();
+        };
 
-        return { 
-            products,
+        return {
+            search,
+            productsListing,
             selectedProducts,
             deleteProducts,
-            editProduct
+            editProduct,
         };
-    }
+    },
 };
 </script>

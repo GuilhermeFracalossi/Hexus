@@ -2,11 +2,21 @@
     <div>
         <div>
             <button
-                class="btn btn-primary" @click="$router.push({ name: 'users.create' })">
+                class="btn btn-primary"
+                @click="$router.push({ name: 'users.create' })"
+            >
                 Incluir
             </button>
-            <button class="btn btn-danger" @click="deleteUsers(selectedUsers)">Excluir</button>
 
+            <button class="btn btn-danger" @click="deleteUsers(selectedUsers)">
+                Excluir
+            </button>
+            <input
+                type="text"
+                class="form-control"
+                v-model="search"
+                placeholder="Pesquisar usuários (nome ou cpf)"
+            />
         </div>
 
         <table class="table">
@@ -20,8 +30,8 @@
                 </tr>
             </thead>
             <tbody>
-                <template v-for:="user in users">
-                    <tr >
+                <template v-for:="user in usersListing">
+                    <tr>
                         <td>
                             <input
                                 class="form-check-input"
@@ -43,30 +53,45 @@
 
 <script>
 import useUsers from "../../composables/users";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import router from "../../router";
 export default {
-
     setup() {
-        const selectedUsers = ref([])
-        const { users, getUsers, destroyUsers } = useUsers();
+        const selectedUsers = ref([]);
+        const { usersListing, getUsersForListing, destroyUsers } = useUsers();
+        const search = ref([]);
+        var timer  = undefined;
+        onMounted(getUsersForListing);
+        
+        watch(
+            search,
+            (newSearch, oldSearch) => {
+                console.log(usersListing)
+                clearTimeout(timer);
 
-        onMounted(getUsers);
-
+                timer = setTimeout(() => {
+                    getUsersForListing(newSearch);
+                }, 500);
+            },
+            {
+                flush: "post",
+            }
+        );
         const editUser = (id) => {
-            return router.push({ name: 'users.edit', params: { id: id} })
-        }
+            return router.push({ name: "users.edit", params: { id: id } });
+        };
         const deleteUsers = async (ids) => {
-            await destroyUsers(ids)
-            await getUsers()
-        }
+            await destroyUsers(ids);
+            await getUsersForListing();
+        };
 
-        return { 
-            users,
+        return {
+            search,
+            usersListing,
             selectedUsers,
             deleteUsers,
-            editUser
+            editUser,
         };
-    }
+    },
 };
 </script>

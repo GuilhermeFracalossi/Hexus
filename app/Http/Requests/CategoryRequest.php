@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'parent_category'=>'nullable|integer',
+            'parent_category_id'=>'nullable|integer',
             'status'=>'required|string'
         ];
     }

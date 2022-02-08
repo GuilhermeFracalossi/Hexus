@@ -1,3 +1,3 @@
 <template>
-    <h1>Selecina um ai na esquerda amigao!</h1>
+    <h1>Escolha um dos menus a esquerda</h1>
 </template>

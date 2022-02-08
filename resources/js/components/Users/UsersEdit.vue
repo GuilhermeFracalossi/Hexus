@@ -41,7 +41,7 @@
         <div class="mb-3">
             <label for="user_status" class="form-label">Status</label>
             <select class="form-select" id="user_status" v-model="user.status">
-                <option selected>Selecione status</option>
+                <option value="0">Selecione status</option>
                 <option value="A">Ativo</option>
                 <option value="I">Inativo</option>
             </select>
@@ -66,7 +66,6 @@ export default {
 
         onMounted(getUser(props.id));
         const saveUser = async () => {
-            console.log(props.id)
             await updateUser(props.id);
         };
 
