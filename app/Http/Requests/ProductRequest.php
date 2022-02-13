@@ -30,6 +30,7 @@ class ProductRequest extends FormRequest
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
             'status' => 'string',
+            'images' => 'nullable|file'
         ];
     }
 }

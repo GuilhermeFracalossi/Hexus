@@ -3,6 +3,9 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import "bootstrap"
+import "bootstrap/dist/js/bootstrap.js"
+import {VueToastify} from "vue-toastify";
+
 require('alpinejs');
 
 
@@ -17,13 +20,9 @@ createApp({
             open: false
         }
     }
-    
-    
-}
+}).use(router).use(VueToastify).mount("#app");
 
-).use(router).mount("#app");
 
-import "bootstrap/dist/js/bootstrap.js"
 
 
 

@@ -2,8 +2,8 @@
     <div>
         <div>
            
-            <router-link :to="{ name: 'products.create' }" class="btn btn-primary"></router-link>
-                Incluir
+            <router-link :to="{ name: 'products.create' }" class="btn btn-primary">Incluir</router-link>
+                
          
             <button
                 class="btn btn-danger"

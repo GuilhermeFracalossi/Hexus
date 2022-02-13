@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,10 @@ Route::view('/dashboard/{any}', 'dashboard')
 Route::view('/', 'home')->name('home');
 
 Route::view('/product/{any}', 'home')->where('any', '.*');
+
+Route::view('/cart', 'home');
+
+Route::get('/cart/list', [CartController::class, 'index']);
+Route::post('/cart', [CartController::class, 'insert']);
+
+Route::delete('/cart', [CartController::class, 'delete']);

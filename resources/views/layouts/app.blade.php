@@ -12,14 +12,17 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        @stack('styles')
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100" id="app">
+    <body>
+        <div class="app" id="app">
             
             @include('layouts.navigation')
-            @if(Auth::check() && Auth::user()->role === 'A' ) 
+            @if(Auth::check() && Auth::user()->role === 'A') 
                 @include('layouts.navigationAdmin')
             @endif
             <!-- Page Heading -->
@@ -30,7 +33,7 @@
             </header> --}}
 
             <!-- Page Content -->
-            <main>
+            <main class="container">
                 {{ $slot }}
             </main>
         </div>

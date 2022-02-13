@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Image;
+use App\Models\Images;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller {
     /**
@@ -36,6 +39,14 @@ class ProductController extends Controller {
      */
     public function store(ProductRequest $request) {
         $product = Product::create($request->validated());
+        
+        if ($request->file('images')->isValid()) {
+            $image = new Image();
+            $image->products_id = $product->id;
+            $image->path = $request->file('images')->store('', 'images');
+            $image->save();
+        }
+      
         return new ProductResource($product);
     }
 

@@ -12,6 +12,8 @@ import UsersIndex from "../components/users/UsersIndex";
 import UsersCreate from "../components/users/UsersCreate";
 import UsersEdit from "../components/users/UsersEdit";
 
+import Cart from "../components/Cart";
+
 
 import Home from "../components/Home";
 import ProductView from "../components/ProductView";
@@ -85,6 +87,11 @@ const routes = [
         name: "product.view",
         component: ProductView,
         props: true
+    },
+    {
+        path: "/cart",
+        name: "cart",
+        component: Cart
     }
 ];
 
