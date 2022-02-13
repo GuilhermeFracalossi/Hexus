@@ -58,16 +58,8 @@ class CategoryController extends Controller {
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category) {
-        //
+    public function destroy(Request $request) {
+        Category::destroy($request->ids);
+        return response()->noContent();
     }
-    public function destroyMultiple(Request $request) {
-        // dd($request);
-         try {
-             Category::whereIn('id', $request->ids)->delete();
-             return response()->json('categories deleted');
-         } catch (Exception $e) {
-             return response()->json($e->getMessage(), 500);
-         }
-     }
 }

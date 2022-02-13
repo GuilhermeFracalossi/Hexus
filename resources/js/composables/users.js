@@ -39,6 +39,7 @@ export default function useUsers() {
     };
 
     const storeUser = async (data) => {
+        console.log(data)
         try {
             await axios.post("/api/users/", data);
             await router.push({ name: "users.index" });
@@ -57,7 +58,7 @@ export default function useUsers() {
     };
     const destroyUsers = async (ids) => {
         try {
-            await axios.delete(`/api/users/deleteMultiple`, { ids: ids });
+            await axios.delete(`/api/users/delete`, {data: { ids: Array.from(ids) }});
         } catch (err) {
             console.log(err);
         }

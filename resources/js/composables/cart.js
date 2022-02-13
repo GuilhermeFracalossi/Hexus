@@ -7,6 +7,7 @@ export default function useCart() {
     const cart = ref([]);
     const router = useRouter();
 
+    const products = ref([]);
 
 
    // const errors = ref("");
@@ -14,7 +15,7 @@ export default function useCart() {
         console.log(data)
         try {
             await axios.post("/cart", data);
-            //await router.push({ name: "cart" });
+            await router.push({ name: "cart" });
         } catch (err) {
             console.log(err);
         }
@@ -30,6 +31,7 @@ export default function useCart() {
 
     return {
         cart,
+        products,
         addProduct,
         getCart
     };

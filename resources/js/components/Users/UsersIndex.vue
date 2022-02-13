@@ -1,14 +1,14 @@
 <template>
     <div>
         <div>
-            <button
+            <router-link
                 class="btn btn-primary"
-                @click="$router.push({ name: 'users.create' })"
+                :to="({ name: 'users.create' })"
             >
                 Incluir
-            </button>
+            </router-link>
 
-            <button class="btn btn-danger" @click="deleteUsers(selectedUsers)">
+            <button class="btn btn-danger" @click="deleteUsers(selectedUsers)" :disabled="selectedUsers.length == 0">
                 Excluir
             </button>
             <input

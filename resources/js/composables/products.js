@@ -23,7 +23,7 @@ export default function useProducts() {
     };
 
     const getActiveProducts = async (random = false, category = null) => {
-        let response = await axios.get("/api/products?random="+random);
+        let response = await axios.get("/api/products?random="+random+"&status=A");
         products.value = response.data;
 
     };
@@ -66,7 +66,11 @@ export default function useProducts() {
         }
     };
     const destroyProducts = async (ids) => {
-        await axios.delete('/api/products/deleteMultiple',  {ids: ids})
+        try {
+            await axios.delete('/api/products/delete',   {data: {ids: Array.from(ids)}} )
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return {

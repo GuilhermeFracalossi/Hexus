@@ -22,23 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::delete('products/deleteMultiple', [ProductController::class, 'destroyMultiple']);
 
-Route::apiResource('products', ProductController::class)->except([
-    'destroy'
-]);
+Route::apiResource('products', ProductController::class);
+
+Route::apiResource('users', UserController::class);
+
+Route::apiResource('categories', CategoryController::class);
 
 
-Route::delete('users/deleteMultiple', [UserController::class, 'destroyMultiple']);
+//Route::delete('products/deleteMultiple', [ProductController::class, 'destroyMultiple']);
+//Route::delete('users/deleteMultiple', [UserController::class, 'destroyMultiple']);
 
-Route::apiResource('users', UserController::class)->except([
-    'destroy'
-]);
 
-Route::delete('categories/deleteMultiple', [CategoryController::class, 'destroyMultiple']);
+//Route::delete('categories/deleteMultiple', [CategoryController::class, 'destroyMultiple']);
 
-Route::apiResource('categories', CategoryController::class)->except([
-    'destroy'
-]);
 
 

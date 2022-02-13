@@ -60,7 +60,7 @@ export default function useCategories () {
 
     const destroyCategories = async(ids) => {
         try {
-            await axios.delete('/api/categories/'+ {ids: ids})
+            await axios.delete('/api/categories/delete', {data : {ids: Array.from(ids) }})
         } catch(err) {
             console.log(err)
         }

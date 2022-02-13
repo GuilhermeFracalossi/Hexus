@@ -1,35 +1,43 @@
 <template>
-    
+    <div class="container">
+        <section>
+            <h2>Carrinho</h2>
 
+            <table>
+                <thead>
 
-<h1>Carrinho</h1>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </section>
 
+        <section>
+            <h2>Frete</h2>
+        </section>
+
+        <section>
+            <h2>Resumo</h2>
+        </section>
+    </div>
 </template>
 
-
 <script>
-import { onBeforeMount, onMounted } from "vue";
-import useProducts from "../composables/products";
+import { onMounted } from "vue";
+import useCart from "../composables/cart";
 
 export default {
-
-     props: {
-        id: {
-            required: false,
-            type: String,
-        },
-    },
-    setup(props) {
-        const { product } = useProducts();
+    setup() {
+        const { product, getCart } = useCart();
         //  const product = ref([]);
 
-        onBeforeMount(console.log('aa'));
-        onMounted(console.log('tete'));
+        onMounted(()=> {
+            getCart()
+        });
 
-
-        
         return {
-            product
+            product,
         };
     },
 };

@@ -27,8 +27,6 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request) {
-        dd($request);
-
         $user = User::create($request->validated());
         return new UserResource($user);
     }
@@ -65,13 +63,9 @@ class UserController extends Controller {
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroyMultiple(Request $request) {
-        try {
-            User::whereIn('ids', $request->ids)->delete();
-            return response()->json('users deleted');
-        }catch(Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
 
+    public function destroy(Request $request) {
+        User::destroy($request->ids);
+        return response()->noContent();
     }
 }

@@ -9,12 +9,19 @@ class CartController extends Controller
 {
     
     public function index() {
-        return Cookie::get('cart');
+        return json_decode(Cookie::get('cart'));
 
     }
     public function insert(Request $request) {
-        $value = $request->id;
-        Cookie::queue('cart',$request->id, 240);
+        
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart')) : [];
+
+        $cart = (array) $cart;
+        $cart[] = $request->id;
+
+        $cart = array_unique($cart);
+
+        Cookie::queue('cart',json_encode($cart), 240);
 
     }
 

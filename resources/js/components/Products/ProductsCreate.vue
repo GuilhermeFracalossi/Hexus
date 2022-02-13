@@ -17,9 +17,9 @@
                 v-model="form.category"
             >
                 <option value="0">Selecione categoria...</option>
-                <option value="1">Processador</option>
-                <option value="2">Placa de vídeo</option>
-                <option value="3">Placa mãe</option>
+                
+                <option v-bind:value="category.id" v-for:="category in categories">{{category.name}}</option>
+
             </select>
         </div>
         <div class="mb-3">
@@ -88,8 +88,9 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import useProducts from "../../composables/products";
+import useCategories from "../../composables/categories";
 
 export default {
     setup() {
@@ -105,9 +106,12 @@ export default {
 
         const { errors, storeProduct } = useProducts();
 
+        const { categories, getCategories } = useCategories();
+
         const submitFiles = (event) => {
             files = event.target.files[0];
         }
+        onMounted(getCategories);
 
         const saveProduct = async () => {
             let data = new FormData();
@@ -125,7 +129,8 @@ export default {
             form,
             errors,
             saveProduct,
-            submitFiles
+            submitFiles,
+            categories
         };
     },
 };

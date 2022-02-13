@@ -19,10 +19,18 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        if ($request->status == "a") {
-            $products = ProductResource::collection(Product::all()->where('status', '=', 'A'));
+        $resource = null;
+
+        if (isset($request->ids)) {
+            $resource = Product::find($request->ids);
+        }
+        else { 
+            $resource = Product::all();
+        }
+        if ($request->status == "A") {
+            $products = ProductResource::collection( $resource->where('status', '=', 'A'));
         } else {
-            $products = ProductResource::collection(Product::all());
+            $products = ProductResource::collection( $resource);
         }
         
         return $request->random ? $products->shuffle() : $products;
@@ -79,17 +87,10 @@ class ProductController extends Controller {
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product) {
-        $product->delete();
+    public function destroy(Request $request) {
+        Image::whereIn('products_id', $request->ids)->delete();
+        Product::destroy($request->ids);
         return response()->noContent();
     }
-    public function destroyMultiple(Request $request) {
-       // dd($request);
-        try {
-            Product::whereIn('id', $request->ids)->delete();
-            return response()->json('products deleted');
-        } catch (Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
 }
+

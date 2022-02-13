@@ -1,15 +1,16 @@
 <template>
     <div>
         <div>
-            <button
+            <router-link
                 class="btn btn-primary"
-                @click="$router.push({ name: 'categories.create' })"
+                :to="({ name: 'categories.create' })"
             >
                 Incluir
-            </button>
+            </router-link>
             <button
                 class="btn btn-danger"
                 @click="deleteCategories(selectedCategories)"
+                :disabled="selectedCategories.length == 0"
             >
                 Excluir
             </button>
