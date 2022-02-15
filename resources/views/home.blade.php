@@ -1,6 +1,4 @@
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-@endpush
+
 
 
 <x-app-layout>

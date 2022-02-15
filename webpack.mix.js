@@ -11,6 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
+//  mix.webpackConfig({
+//     resolve: {
+//         fallback: {
+//             fs: false,
+//             crypto: false,
+//             https: false,
+//             http: false,
+//             os: false,
+//             zlib: false
+//         }
+//     }
+// });
+mix.options({ legacyNodePolyfills: true })
 mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),

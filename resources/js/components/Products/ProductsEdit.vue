@@ -32,6 +32,15 @@
             />
         </div>
         <div class="mb-3">
+            <label for="product_brand" class="form-label">Marca</label>
+            <input
+                type="text"
+                class="form-control"
+                id="product_brand"
+                v-model="product.brand"
+            />
+        </div>
+        <div class="mb-3">
             <label for="product_status" class="form-label">Status</label>
             <select
                 class="form-select"

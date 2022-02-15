@@ -16,7 +16,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        @stack('styles')
+        {{-- @stack('styles') --}}
     </head>
     <body>
         <div class="app" id="app">

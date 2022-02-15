@@ -25,7 +25,6 @@ export default function useProducts() {
     const getActiveProducts = async (random = false, category = null) => {
         let response = await axios.get("/api/products?random="+random+"&status=A");
         products.value = response.data;
-
     };
 
     const getProductsForListing = async(search) => {
@@ -43,7 +42,6 @@ export default function useProducts() {
             }
         });
         productsListing.value = data
-        
     }
 
     const storeProduct = async (data) => {

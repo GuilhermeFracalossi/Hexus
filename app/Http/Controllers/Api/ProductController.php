@@ -21,8 +21,9 @@ class ProductController extends Controller {
     public function index(Request $request) {
         $resource = null;
 
-        if (isset($request->ids)) {
-            $resource = Product::find($request->ids);
+        if ($request->get('ids')  != null) {
+            
+            $resource = Product::find($request->get('ids'));
         }
         else { 
             $resource = Product::all();
@@ -32,13 +33,9 @@ class ProductController extends Controller {
         } else {
             $products = ProductResource::collection( $resource);
         }
-        
         return $request->random ? $products->shuffle() : $products;
     }
 
-    public function indexActives() {
-        return ProductResource::collection(Product::all()->where('status', '=', 'A'));
-    }
     /**
      * Store a newly created resource in storage.
      *
@@ -65,7 +62,15 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product) {
-        return new ProductResource($product);
+
+
+        $image = Image::where('products_id', $product->id);
+        if ($image->exists()) {
+            $product->images = $image->first()->path;
+        } else {
+            $product->images = null;
+        }
+        return new ProductResource($product);;
     }
 
     /**

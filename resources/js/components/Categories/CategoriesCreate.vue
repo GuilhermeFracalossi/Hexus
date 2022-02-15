@@ -9,7 +9,7 @@
                 v-model="form.name"
             />
         </div>
-        <div class="mb-3"  v-if:="categories.length > 0">
+        <div class="mb-3"  v-if="categories.length > 0">
             <label for="category_parent_category" class="form-label"
                 >Categoria pai</label
             >

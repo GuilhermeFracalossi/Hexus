@@ -1,5 +1,5 @@
 <style scoped lang="css">
-  @import "~/css/productView.css"; 
+@import "~/css/productView.css";
 </style>
 <template>
     <section class="product-view">
@@ -36,10 +36,7 @@
                 <!-- <div class="divisor-vertical"></div> -->
 
                 <div class="product-main-image">
-                    <img
-                        src="{{('img/' . $product->image) }}"
-                        alt=""
-                    />
+                    <img :src="'/img/'+ product.images" alt="" />
                 </div>
             </div>
             <div class="product-info">
@@ -54,17 +51,24 @@
                         <p class="rating-count-text">140 avaliações</p>
                     </div> -->
 
-                    <div class="older-price">{{product.price}}</div>
+                    <div class="older-price"></div>
 
-                    <div class="current-price">R$ 3.499,90</div>
+                    <div class="current-price">
+                        {{
+                            Number(product.price).toLocaleString("pt-br", {
+                                style: "currency",
+                                currency: "BRL",
+                            })
+                        }}
+                    </div>
 
-                    <div class="payment">
+                    <!-- <div class="payment">
                         <p class="discount-payment">
                             À vista no boleto com 13% OFF
                         </p>
                         <p>Ou em até 12x {{Math.round(product.price / 12, -2)}} no cartão sem juros</p>
                         <a href="">Outras formas de pagamento</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="shipping-container">
                     <p>Calcular o frete</p>
@@ -78,6 +82,7 @@
                         <button
                             class="btn btn-outline-primary"
                             id="submit_cep_btn"
+                            @click="calcularFrete()"
                         >
                             Ok
                         </button>
@@ -89,14 +94,12 @@
                     <i class="bi bi-share" @click="shareLink"></i>
                     <i class="bi bi-heart"></i>
                 </div>
-                <button @click="addToCart" class="primary" id="buy-product-btn">Comprar</button>
+                <button @click="addToCart" class="primary" id="buy-product-btn">
+                    Comprar
+                </button>
             </div>
         </div>
     </section>
-
-    <h1>{{ product.name }}</h1>
-
-    <p>{{ product.price }}</p>
 </template>
 
 <script>
@@ -115,20 +118,23 @@ export default {
         const { product, getProduct } = useProducts();
         const { addProduct } = useCart();
 
-        //  const product = ref([]);
-
-        onMounted(getProduct(props.id));
+        onMounted(getProduct(props.id), console.log(product));
 
         const addToCart = async () => {
-            await addProduct({id: props.id});
-        }
+            await addProduct({ id: props.id });
+        };
+
+        const calcularFrete = () => {
+
+        };
         // const shareLink = () => {
         //     $vToastify.success("Foda");
         // }
-        
+
         return {
             product,
-            addToCart
+            addToCart,
+            calcularFrete,
         };
     },
 };

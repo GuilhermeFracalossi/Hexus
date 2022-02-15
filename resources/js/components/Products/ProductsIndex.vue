@@ -90,7 +90,6 @@ export default {
             return router.push({ name: "products.edit", params: { id: id } });
         };
         const deleteProducts = async (ids) => {
-            console.log(Array.from(ids))
             await destroyProducts(ids);
             await getProductsForListing();
         };

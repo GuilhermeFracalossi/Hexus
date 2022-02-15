@@ -44,6 +44,15 @@
                 <option value="I">Inativo</option>
             </select>
         </div>
+         <div class="mb-3">
+            <label for="product_brand" class="form-label">Marca</label>
+            <input
+                type="text"
+                class="form-control"
+                id="product_brand"
+                v-model="form.brand"
+            />
+        </div>
         <div class="mb-3">
             <label for="product_description" class="form-label"
                 >Descrição</label
@@ -100,6 +109,7 @@ export default {
             price: "",
             status: 0,
             description: "",
+            brand: "",
             information: "",
         });
         var files;

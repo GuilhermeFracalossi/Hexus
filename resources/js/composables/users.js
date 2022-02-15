@@ -39,7 +39,6 @@ export default function useUsers() {
     };
 
     const storeUser = async (data) => {
-        console.log(data)
         try {
             await axios.post("/api/users/", data);
             await router.push({ name: "users.index" });

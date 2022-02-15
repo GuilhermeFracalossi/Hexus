@@ -32,7 +32,10 @@ Route::view('/product/{any}', 'home')->where('any', '.*');
 
 Route::view('/cart', 'home');
 
-Route::get('/cart/list', [CartController::class, 'index']);
+Route::get('/cart/list', [CartController::class, 'index'])->name('cart');;
 Route::post('/cart', [CartController::class, 'insert']);
 
-Route::delete('/cart', [CartController::class, 'delete']);
+Route::put('/cart/{id}', [CartController::class, 'updateQuantity']);
+
+Route::delete('/cart/all', [CartController::class, 'deleteCart']);
+Route::delete('/cart/{id}', [CartController::class, 'removeItem']);

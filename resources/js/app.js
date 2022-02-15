@@ -13,11 +13,14 @@ import { createApp } from "vue";
 
 import router from "./router";
 
+
+
 createApp({
 
     data() {
         return {
-            open: false
+            open: false,
+            publicPath: process.env.BASE_URL
         }
     }
 }).use(router).use(VueToastify).mount("#app");
