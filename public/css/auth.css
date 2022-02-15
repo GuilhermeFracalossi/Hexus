@@ -1,0 +1,132 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.brand img {
+    width: 200px;
+    height: 80px;
+}
+
+.form-container {
+    background-color: #2A2C32;
+    box-shadow: 5px 15px 28px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 40px 35px;
+    width: 750px;
+}
+
+.fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+
+
+.form-container h2 {
+    color: #dedede;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+}
+
+.label-form-auth {
+    text-transform: uppercase;
+    color: #dedede;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.field-auth {
+    box-shadow: 10px 11px 17px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    color: #c9c9c9;
+    border: 1px solid rgba(44, 47, 53, 0.29);
+    background-color: #2E3138;
+    padding: 14px 20px;
+    letter-spacing: 1px;
+
+}
+
+.field-auth::placeholder {
+    color: #979797;
+    letter-spacing: 1px;
+}
+
+.recover-pass-action {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #c4c4c4;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.recover-pass-action:hover {
+    color: white;
+}
+
+.remember-text {
+    font-size: 14px;
+    color: #c4c4c4;
+    margin-left: 10px;
+}
+.action-button-auth {
+    font-size: 23px;
+    display: block;
+    margin: auto;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+}
+
+.action-button-auth .bi {
+    font-size: 35px;
+
+    margin-left: 10px;
+}
+
+.bottom-text-login {
+    font-size: 22px;
+    color: #dedede;
+    text-align: center;
+    letter-spacing: 1.5px;
+    margin-top: 40px;
+}
+
+.bottom-text-login p {
+    margin-bottom: 0px;
+    font-size: 18px;
+}
+
+.bottom-text-login a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #f4f4f4;
+}
