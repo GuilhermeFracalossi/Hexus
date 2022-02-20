@@ -31,9 +31,9 @@ export default function useCart() {
         products.data.data.forEach(product => {
             product['quantity'] = response.data[product.id]
         })
-        
+      
         productsCart.value = products.data.data;
-        console.log(productsCart.value)
+       
        
     };
 

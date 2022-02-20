@@ -22,6 +22,7 @@ class CartController extends Controller {
             $cart[$request->id] = self::DEFAULT_QUANTITY;
         }
 
+
         Cookie::queue('cart', json_encode($cart), 240);
     }
 

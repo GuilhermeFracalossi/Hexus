@@ -41,7 +41,7 @@
                             {{ product.name }}
                         </td>
                         <td @click="editProduct(product.id)">
-                            {{ product.category }}
+                            {{ product.categoryName }}
                         </td>
                         <td @click="editProduct(product.id)">
                             {{ product.price }}

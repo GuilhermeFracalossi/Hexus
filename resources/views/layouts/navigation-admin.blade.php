@@ -1,29 +1,38 @@
-<nav x-data="{ open: false }" class="nav-admin">
+
+
+<aside x-data="{ open: false }" class="lateral-menu-admin">
     <!-- Primary Navigation Menu -->
 
 
     <!-- Logo -->
-    <div>
+    <div class="brand-container">
+
         <a href="{{ route('dashboard') }}">
-            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+            <img src="{{asset('images/brand.svg')}}" width="160">
+           
         </a>
+
+        <p class="brand-text-admin">Admin</p>
     </div>
-    <ul class="flex">
-        <!-- Navigation Links -->
+
+    <ul class="side-nav-admin">
         <li>
-            <x-nav-link :href="url('/dashboard/products')" :active="request()->routeIs('admin.product')">
+            <i class="bi bi-bag"></i>
+            <a href="{{url('/dashboard/products')}}" class="link-aside" >
                 Produtos
-            </x-nav-link>
+            </a >
         </li>
         <li>
-            <x-nav-link :href="url('/dashboard/categories')" :active="request()->routeIs('admin.category')">
-               Categorias
-            </x-nav-link>
+            <i class="bi bi-tag"></i>
+            <a href="{{url('/dashboard/categories')}}" class="link-aside">
+                Categorias
+             </a>
         </li>
         <li>
-            <x-nav-link :href="url('/dashboard/users')" :active="request()->routeIs('admin.user')">
+            <i class="bi bi-person"></i>
+            <a href="{{url('/dashboard/users')}}" class="link-aside">
                 Usuários
-            </x-nav-link>
+            </a>
         </li>
     </ul>
 
@@ -57,4 +66,4 @@
             </div>
         </div>
     </div> --}}
-</nav>
+</aside>

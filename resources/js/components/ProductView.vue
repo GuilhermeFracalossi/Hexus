@@ -1,6 +1,4 @@
-<style scoped lang="css">
-@import "~/css/productView.css";
-</style>
+<style scoped lang="css" src="../../css/ProductView.css"></style>
 <template>
     <section class="product-view">
         <h2>{{ product.name }}</h2>
@@ -62,13 +60,16 @@
                         }}
                     </div>
 
-                    <!-- <div class="payment">
+                    <div class="payment">
                         <p class="discount-payment">
                             À vista no boleto com 13% OFF
                         </p>
-                        <p>Ou em até 12x {{Math.round(product.price / 12, -2)}} no cartão sem juros</p>
+                        <p>Ou em até 12x {{  Number(Math.round(product.price / 12, -2)).toLocaleString("pt-br", {
+                                style: "currency",
+                                currency: "BRL",
+                            })}} no cartão sem juros</p>
                         <a href="">Outras formas de pagamento</a>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="shipping-container">
                     <p>Calcular o frete</p>
@@ -100,6 +101,31 @@
             </div>
         </div>
     </section>
+     <section class="product-description">
+            <div class="section-header-product d-flex align-items-center">
+                <i class="bi bi-file-earmark-text" style="color: #f4f4f4; font-size: 40px;"></i>
+                <h3>Descrição</h3>
+            </div>
+            <h4>{{product.name}}</h4>
+
+            <p>
+                {{product.description}}
+            </p>
+
+
+        </section>
+        <section class="product-info">
+            <div class="section-header-product d-flex align-items-center">
+                <i class="bi bi-info-circle" style="color: #f4f4f4; font-size: 40px;"></i>
+                <h3>Informações</h3>
+            </div>
+
+            <p>
+                {{product.information}}
+            </p>
+        </section>
+
+        <Footer/>
 </template>
 
 <script>
@@ -125,11 +151,9 @@ export default {
         };
 
         const calcularFrete = () => {
-
+            //console.log( VueToastify.success("Successfully updated value!"))
+            
         };
-        // const shareLink = () => {
-        //     $vToastify.success("Foda");
-        // }
 
         return {
             product,

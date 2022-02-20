@@ -13,8 +13,13 @@ export default function useCategories () {
     const errors = ref("");
 
 
-    const getCategories = async() => {
-        let response =  await axios.get('/api/categories')
+    const getCategories = async(status = '') => {
+        
+        let variables = '';
+        if (status != "") {
+            variables = "?status="+status
+        }
+        let response =  await axios.get('/api/categories'+variables)
         categories.value = response.data.data;
 
     }

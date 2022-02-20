@@ -66,7 +66,6 @@ export default {
         watch(
             search,
             (newSearch, oldSearch) => {
-                console.log(usersListing)
                 clearTimeout(timer);
 
                 timer = setTimeout(() => {

@@ -1,0 +1,138 @@
+section {
+    margin: 40px 0px;
+}
+
+.primary {
+    background-color: #0090F6;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+
+#promo-carousel {
+    margin-bottom: 30px;
+}
+
+.carousel-inner img {
+    height: 580px;
+    object-position: center;
+    object-fit: cover;
+
+}
+
+.products h2 {
+    color: #f4f4f4;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.product {
+    cursor: pointer;
+    background-color: #2F3237;
+    border-radius: 5px;
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    box-shadow: 2px 6px 13px 1px rgba(0, 0, 0, 0.13);
+
+}
+
+.product .rating {
+    padding: 0px 10px;
+}
+
+.product .rating .bi {
+    color: #0090F6;
+}
+
+.product .rating-text {
+    color: #0090F6;
+    display: inline-block;
+}
+
+.product .product-image {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.product .product-image img{
+    border: none;
+}
+
+.product-info {
+    padding: 10px;
+
+}
+
+.product-info p {
+    margin: 0px;
+}
+
+.product-info .description {
+    color: #f4f4f4;
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
+}
+
+.product-info .price {
+    color: #0090F6;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.product-info .payment {
+    color: #c2c2c2;
+    font-weight: lighter;
+    font-size: 11px;
+}
+
+.categories h2 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.categories-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 30px;
+
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #dedede;
+    background-color: #34373B;
+    border-radius: 5px;
+    box-shadow: 12px 12px 20px -1px rgba(0, 0, 0, 0.25);
+    padding: 20px 0px;
+}
+
+.category p {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+}

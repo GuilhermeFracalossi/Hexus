@@ -15,6 +15,7 @@
 .product-view h2 {
     color: #f0f0f0;
     font-size: 32px;
+    margin-top: 20px;
     margin-bottom: 40px;
 }
 
@@ -179,6 +180,7 @@ section.product-info p {
     color: #dadada;
     font-size: 16px;
     margin-bottom: 20px;
+    white-space: pre-line;
 }
 
 

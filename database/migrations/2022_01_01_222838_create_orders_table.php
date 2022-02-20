@@ -20,7 +20,6 @@ class CreateOrdersTable extends Migration
             $table->date('date');
             $table->char('orders_status', 1);
             $table->foreignId('users_id')->constrained();
-            $table->foreignId('addresses_id')->constrained();
 
             $table->timestamps();
         });

@@ -1,111 +1,89 @@
-<nav class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
-                    </a>
-                </div>
+<nav>
+    <div class="container">
+        <div class="menu-toggle">
+            <i class="bi bi-list" style="font-size: 40px; color: #b6b6b6;"> </i>
+        </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ ('Dashboard') }}
-                    </x-nav-link>
-                </div>
+        <a href="{{ route('home') }}" style="color: unset">
+            <div class="brand">
+                <img src="{{asset('images/brand.svg')}}">
             </div>
-            <div>
+        </a>
 
-                <input type="text" class="form-control" placeholder="Pesquisar produtos">
-                <i class="bi bi-search" style="width: 30px; height: 30px"></i>
-            </div>
-            
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+        <div class="search-bar">
+            <input type="text" v-model="search" placeholder="Pesquisar produtos" id="search-product" @keyup.enter="$router.push({ path: '/search', query: { q: search } })">
+            <i class="bi bi-search search-product-icon" style="font-size: 28px; color: #b6b6b6;" @@click="$router.push({ path: '/search', query: { q: search } })"></i>
+        </div>
 
-                @if (Route::has('login'))
-                <div class="px-6 py-4 sm:block">
-                    @auth
-                    <x-dropdown align="right" width="48">
+        <div class="nav-user-container">
 
-                        <x-slot name="trigger">
-                            <button
-                                class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                <div>{{ Auth::user()->name }}</div>
-                                <div class="ml-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
+            @if (Route::has('login'))
+            <div class="px-6 py-4 sm:block">
+                @auth
+                <x-dropdown align="right" width="48">
 
-                        <x-slot name="content">
-                            <!-- Authentication -->
-                            <ul>
-                                <li>
-                                    Meu perfil
-                                </li>
-                                <li>Meus pedidos</li>
-                            </ul>
-                            {{-- <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                    <x-slot name="trigger">
+                        <button
+                            class="flex items-center text-sm font-medium text-gray-300 hover:text-gray-100 hover:border-gray-300 focus:outline-none focus:text-white  transition duration-150 ease-in-out">
+                            <div>{{ Auth::user()->name }}</div>
+                            <div class="ml-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
 
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ ('Log Out') }}
-                                </x-dropdown-link>
-                            </form> --}}
-                        </x-slot>
-                    </x-dropdown>
-                    @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    <x-slot name="content">
+                        <ul>
+                            <li>
+                                Meu perfil
+                            </li>
 
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                        class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                    @endif
-                    @endauth
-                </div>
+                        </ul>
+                    </x-slot>
+                </x-dropdown>
+                @else
+                <a href="{{ route('login') }}" class="actions-auth" >Log in</a>
+
+                @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="actions-auth">Register</a>
                 @endif
+                @endauth
+            </div>
+            @endif
+        </div>
+
+
+        <div class="actions-nav">
+            <div class="cart-nav" @@click="$router.push({name: 'cart'})">
+                <i class="bi bi-cart3" style="font-size: 30px; color: #0090F6;"></i>
             </div>
 
-            <button @@click="$router.push({name: 'wishlist'})"><i class="bi bi-heart"></i></button>
-            <button @@click="$router.push({name: 'cart'})"><i class="bi bi-cart2"></i></button>
+            <img src="{{asset('images/line.svg')}}" alt="">
+            
+
             @auth
             <button>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <i class="bi bi-box-arrow-right" onclick="event.preventDefault();
+                    <i class="bi bi-box-arrow-right" style="font-size: 30px; color: #b2b2b2;" onclick="event.preventDefault();
                     this.closest('form').submit()"></i>
-                   
+
                 </form>
 
             </button>
             @endauth
-            <!-- Settings Dropdown -->
-           
 
-            <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-                <button @@click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
         </div>
     </div>
+
+
+
+
 
     <!-- Responsive Navigation Menu -->
     {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -135,4 +113,6 @@
             </div>
         </div>
     </div> --}}
+
 </nav>
+

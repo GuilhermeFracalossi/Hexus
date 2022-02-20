@@ -22,8 +22,15 @@ export default function useProducts() {
         product.value = response.data.data;
     };
 
-    const getActiveProducts = async (random = false, category = null) => {
-        let response = await axios.get("/api/products?random="+random+"&status=A");
+    const getActiveProducts = async (random = false, category = null, search = null) => {
+        let variable = '';
+        if (category != null) {
+            variable += '&category='+category
+        }
+        if (search != null) {
+            variable += '&search='+search
+        }
+        let response = await axios.get("/api/products?random="+random+"&status=A"+ variable);
         products.value = response.data;
     };
 
@@ -45,7 +52,6 @@ export default function useProducts() {
     }
 
     const storeProduct = async (data) => {
-        console.log(data)
         try {
             await axios.post("/api/products/", data);
             await router.push({ name: "products.index" });
@@ -54,10 +60,11 @@ export default function useProducts() {
         }
     };
 
-    const updateProduct = async (id) => {
+    const updateProduct = async (id, data) => {
+
         try {
-            console.log(product.value)
-            await axios.put("/api/products/"+id, product.value);
+
+            await axios.put("/api/products/"+id, data);
             await router.push({ name: "products.index" });
         } catch (err) {
             console.log(err);

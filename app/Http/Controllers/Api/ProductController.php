@@ -19,22 +19,11 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $resource = null;
-
-        if ($request->get('ids')  != null) {
-            
-            $resource = Product::find($request->get('ids'));
-        }
-        else { 
-            $resource = Product::all();
-        }
-        if ($request->status == "A") {
-            $products = ProductResource::collection( $resource->where('status', '=', 'A'));
-        } else {
-            $products = ProductResource::collection( $resource);
-        }
+        $products = new ProductResource(Product::getAll($request->ids, $request->status, $request->category, $request->search));
+        
         return $request->random ? $products->shuffle() : $products;
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,6 +32,7 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request) {
+
         $product = Product::create($request->validated());
         
         if ($request->file('images')->isValid()) {

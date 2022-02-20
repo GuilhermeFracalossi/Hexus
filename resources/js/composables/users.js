@@ -15,7 +15,6 @@ export default function useUsers() {
     const getUser = async (id) => {
         let response = await axios.get(`/api/users/${id}`);
         user.value = response.data.data;
-        console.log(user.value);
     };
 
     const getUsersForListing = async (search) => {

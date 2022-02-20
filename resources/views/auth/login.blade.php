@@ -1,10 +1,7 @@
 <x-guest-layout>
 
-
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('login') }}" class="form-container">
@@ -27,8 +24,7 @@
             </div>
         </div>
         @if (Route::has('password.request'))
-        <a  href="{{ route('password.request') }}"" class="recover-pass-action">ESQUECI MINHA SENHA</a>
-
+            <a  href="{{ route('password.request') }}" class="recover-pass-action">ESQUECI MINHA SENHA</a>
         @endif
     
         <!-- Remember Me -->
@@ -41,9 +37,13 @@
             </label>
         </div>
 
-        <button type="submit" class="primary action-button-auth" style="margin-top:30px">Entrar
+        <button type="submit" class="primary action-button-auth" style="margin-top:30px; padding: 5px 20px">Entrar
             <i class="bi bi-arrow-right"></i>
         </button>
+
+        <div class="bottom-text-login">
+            <p>Ainda não possui uma conta? <a href="{{route('register')}}">Cadastre-se</a></p>
+        </div>
 
     </form>
 

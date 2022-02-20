@@ -19,7 +19,7 @@ a:hover {
     
     color: unset;
 }
-header {
+nav {
     background-color: #151618;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@ header {
     gap: 10px;
 }
 
-header>.container {
+nav>.container {
     display: flex;
     align-items: center;
 
@@ -73,8 +73,18 @@ header>.container {
     color: #ccc;
 }
 
+.dropdown-profile {
+    border-radius: 5px;
+    background-color: #5A5C62;
+    color: #fff;
+    padding: 5px;
+}
 
-.header-user-container {
+.search-product-icon {
+    cursor: pointer;
+}
+
+.nav-user-container {
     cursor: pointer;
 }
 
@@ -86,29 +96,39 @@ header>.container {
     margin: 0px 20px 0px 10px;
 }
 
-.header-user-container {
+.nav-user-container {
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 0px 20px 0px 20px;
 }
 
-.header-user-container .user-name {
+.nav-user-container .user-name {
     color: #C7C7C7;
     margin: 0px;
 }
 
-.actions-header {
+.actions-nav {
     display: flex;
     gap: 20px;
     align-items: center;
 }
+.actions-auth {
+    color: #b2b2b2;
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.actions-auth:hover {
+    color: #fff;
+}
 
-.actions-header>div {
+.actions-nav>div {
     cursor: pointer;
 }
 
-.actions-header .cart-header {
+.actions-nav .cart-nav {
     border: 2px solid #0090F6;
     border-radius: 5px;
     height: 50px;
@@ -116,6 +136,15 @@ header>.container {
     text-align: center;
 }
 
-.logout-header {
+.logout-nav {
     margin-left: 10px;
 }
+
+.nav-admin {
+    position: fixed;
+    left: 0;
+    width: 300px;
+    
+}
+
+

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="saveProduct">
+    <form @submit.prevent="saveProduct" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="product_name" class="form-label">Nome</label>
             <input
@@ -16,10 +16,8 @@
                 id="product_category"
                 v-model="product.category"
             >
-                <option selected>Selecione categoria...</option>
-                <option value="1">Processador</option>
-                <option value="2">Placa de vídeo</option>
-                <option value="3">Placa mãe</option>
+                <option value="0">Selecione categoria...</option>
+                <option v-bind:value="category.id" v-for:="category in categories">{{category.name}}</option>
             </select>
         </div>
         <div class="mb-3">
@@ -73,6 +71,18 @@
                 v-model="product.information"
             ></textarea>
         </div>
+            <div class="mb-3">
+            <label for="formFileMultiple" class="form-label"
+                >Imagens</label
+            >
+            <input
+                class="form-control"
+                type="file"
+                id="product_images"
+                @change="submitFiles"
+        
+            />
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <router-link :to="{name: 'products.index'}" class="btn btn-secondary">Cancelar</router-link>
 
@@ -82,6 +92,8 @@
 <script>
 import useProducts from "../../composables/products";
 import { onMounted } from "vue";
+import useCategories from "../../composables/categories";
+
 export default {
     props: {
         id: {
@@ -91,16 +103,39 @@ export default {
     },
     setup(props) {
         const { product, getProduct, updateProduct } = useProducts();
+        var files;
+        const { categories, getCategories } = useCategories();
 
-        onMounted(getProduct(props.id));
+
+        onMounted(async()=> {
+            await getCategories(),
+            await getProduct(props.id)
+        });
+        const submitFiles = (event) => {
+            files = event.target.files[0];
+        }
         const saveProduct = async () => {
-            console.log(props.id)
-            await updateProduct(props.id);
+            let data = new FormData();
+
+            data.append('name', product.value.name)
+            data.append('category', product.value.category)
+            data.append('price', product.value.price)
+            data.append('status', product.value.status)
+            data.append('brand', product.value.brand)
+            data.append('description', product.value.description)
+            data.append('information', product.value.information)
+            if (files) {
+                data.append('images', files)
+            }
+
+            await updateProduct(props.id, data);
         };
 
         return {
             product,
+            categories,
             saveProduct,
+            submitFiles
         };
     },
 };

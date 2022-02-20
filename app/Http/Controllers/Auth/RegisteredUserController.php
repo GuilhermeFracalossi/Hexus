@@ -33,15 +33,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $cpf =  preg_replace('/[^0-9]/','',$request->cpf);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'cpf' => ['required', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'cpf' => $cpf,
             'password' => Hash::make($request->password),
         ]);
 

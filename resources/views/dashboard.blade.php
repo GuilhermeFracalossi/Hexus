@@ -1,3 +1,10 @@
+
+@section('admin.navigation')
+    @include('layouts.navigation-admin')
+
+@endsection
+
+
 <x-app-layout >
 
     <div class="py-12">

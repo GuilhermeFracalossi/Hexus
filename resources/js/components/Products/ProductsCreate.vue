@@ -129,6 +129,7 @@ export default {
             data.append('category', form.category)
             data.append('price', form.price)
             data.append('status', form.status)
+            data.append('brand', form.status)
             data.append('description', form.description)
             data.append('information', form.information)
             data.append('images', files)

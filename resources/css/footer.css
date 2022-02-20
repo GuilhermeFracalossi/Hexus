@@ -1,8 +1,11 @@
 
         footer {
             background-color: #17191C;
-            padding: 30px 0px;
+            padding: 30px 20px;
             margin-top: 100px;
+        }
+        footer img {
+            border: none;
         }
 
         footer h3 {
@@ -19,6 +22,16 @@
             margin-bottom: 20px;
         }
 
+
+        .payment-methods-images #boleto {
+            height: 90px;
+
+        }
+        .payment-methods-images #pix {
+            height: 60px;
+            
+        }
+
         .site-map {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -30,8 +43,12 @@
         }
 
         .site-map a {
+            text-transform: capitalize;
             text-decoration: none;
             color: #fff;
+        }
+        .site-map a:hover {
+            color: #dedede;
         }
 
         footer .bottom-footer hr {

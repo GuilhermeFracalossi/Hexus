@@ -10,22 +10,22 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
-//  mix.webpackConfig({
-//     resolve: {
-//         fallback: {
-//             fs: false,
-//             crypto: false,
-//             https: false,
-//             http: false,
-//             os: false,
-//             zlib: false
-//         }
-//     }
-// });
-mix.options({ legacyNodePolyfills: true })
-mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css', 'public/css', [
+mix.js('resources/js/app.js', 'public/js').vue({ version: 3 }).postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
-    require('autoprefixer'),
+    require('autoprefixer')
 ]);
+
+mix.webpackConfig({
+   resolve: {
+        fallback: {
+            //demorou 10 horas pra eu descobrir que tinha que fazer isso pra conseguir fazer funcionar os pacotes npm externos
+            //so queria deixar anotado mesmo
+            
+            http: require.resolve("stream-http"),
+            https: require.resolve("https-browserify")
+
+        }
+
+   },
+});

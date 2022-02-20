@@ -1,59 +1,52 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
+        {{-- <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
-        </x-slot>
+        </x-slot> --}}
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+
+        <form method="POST" action="{{ route('register') }}" class="form-container">
             @csrf
 
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <h2>Cadastro</h2>
             <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <div class="fields-container">
+                <div>
+                    <label class="label-form-auth" for="register_name">NOME</label>
+                    <input id="register_name" name="name" type="text" placeholder="Seu nome completo" class="field-auth" :value="old('name')" required autofocus>
+                </div>
+                <div>
+                    <label class="label-form-auth" for="register_mail">E-MAIL</label>
+                    <input id="register_mail" name="email" type="email" placeholder="seuemail@exemplo.com"
+                        class="field-auth" :value="old('email')" required>
+                </div>
+                <div>
+                    <label class="label-form-auth" for="register_cpf">CPF</label>
+                    <input id="register_cpf" type="text" name="cpf" placeholder="000.000.000-00" class="field-auth">
+                </div>
+    
+                <div>
+                    <label class="label-form-auth" for="register_pass">SENHA</label>
+                    <input type="password" name="password" class="field-auth" id="register_pass" 
+                    required autocomplete="new-password" >
+                </div>
+                <div>
+                    <label class="label-form-auth" for="register_pass_confirmation">CONFIRME A SENHA</label>
+                    <input type="password" class="field-auth" id="register_pass_confirmation"
+                    name="password_confirmation" required>
+                </div>
             </div>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+            <button type="submit" class="primary action-button-auth" style="margin-top:30px">Cadastre-se
+            </button>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
+            <div class="bottom-text-login">
+                <p>Já possui uma conta? <a href="{{ route('login') }}">Faça login</a></p>
             </div>
         </form>
-    </x-auth-card>
 </x-guest-layout>

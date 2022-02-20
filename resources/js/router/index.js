@@ -16,6 +16,14 @@ import Cart from "../components/Cart";
 
 
 import Home from "../components/Home";
+
+import Checkout from "../components/Checkout";
+
+import ConfirmOrder from "../components/ConfirmOrder";
+
+
+import ProductsListing from "../components/ProductsListing";
+
 import ProductView from "../components/ProductView";
 
 import Dashboard from "../components/Dashboard";
@@ -92,6 +100,32 @@ const routes = [
         path: "/cart",
         name: "cart",
         component: Cart
+    },
+    {
+        path: "/products/:category",
+        name: "ProductsListing",
+        component: ProductsListing,
+        props: true
+       
+    },
+    {
+        path: "/search",
+        name: "Search",
+        component: ProductsListing,
+        props: route => ({ query: route.query.q })
+       
+    },
+    {
+        path: "/checkout",
+        name: "checkout",
+        component: Checkout
+       
+    },
+    {
+        path: "/confirmed",
+        name: "confirmOrder",
+        component: ConfirmOrder
+       
     }
 ];
 
